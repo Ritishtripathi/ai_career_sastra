@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerAI — A clearer way to prepare</title>
+<meta name="description" content="CareerAI reads your resume like a mentor would, maps your skill gaps against real roles, and helps you rehearse the interview that actually matters.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,650&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFFCF6;
+    --paper-deep:#FFF3E4;
+    --ink:#26190F;
+    --ink-soft:#5B4B3D;
+    --saffron:#FF6A2E;
+    --koi:#C6401E;
+    --gold:#E3A548;
+    --line:#EBDFCC;
+    --white:#FFFFFF;
+    --shadow: 0 30px 70px rgba(70,38,10,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Inter",sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  button{font:inherit;cursor:pointer}
+  img,svg{display:block;max-width:100%}
+  :focus-visible{outline:2px solid var(--koi);outline-offset:3px;border-radius:4px}
+
+  .container{width:min(1180px,90%);margin:0 auto}
+
+  h1,h2,h3{font-family:"Fraunces",serif;font-weight:560;letter-spacing:-.01em;color:var(--ink)}
+
+  /* ---------- texture ---------- */
+  .grain{position:fixed;inset:0;pointer-events:none;opacity:.028;z-index:60;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+  /* ---------- nav ---------- */
+  .nav{position:sticky;top:0;z-index:40;background:rgba(255,252,246,.86);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
+  .nav.scrolled{border-color:var(--line)}
+  .nav-row{height:78px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:11px;font-family:"Fraunces",serif;font-weight:600;font-size:19px;letter-spacing:-.01em}
+  .brand-mark{width:34px;height:34px;flex-shrink:0}
+  .nav-links{display:flex;gap:34px;font-size:14.5px;color:var(--ink-soft)}
+  .nav-links a{position:relative;padding-bottom:3px}
+  .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--koi);transition:right .28s ease}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a:hover::after{right:0}
+  .nav-actions{display:flex;align-items:center;gap:10px}
+  .menu-btn{display:none;background:none;border:0;width:38px;height:38px;position:relative}
+  .menu-btn span{position:absolute;left:9px;right:9px;height:1.5px;background:var(--ink);transition:.25s}
+  .menu-btn span:nth-child(1){top:14px}.menu-btn span:nth-child(2){top:19px}.menu-btn span:nth-child(3){top:24px}
+  .menu-btn.open span:nth-child(1){transform:translateY(5px) rotate(45deg)}
+  .menu-btn.open span:nth-child(2){opacity:0}
+  .menu-btn.open span:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+
+  .btn{border:0;border-radius:12px;padding:13px 22px;font-weight:600;font-size:14.5px;transition:.25s;display:inline-flex;align-items:center;gap:8px}
+  .btn-line{background:transparent;border:1px solid var(--line);color:var(--ink)}
+  .btn-line:hover{border-color:var(--ink)}
+  .btn-solid{background:var(--ink);color:var(--paper)}
+  .btn-solid:hover{background:var(--koi);transform:translateY(-2px);box-shadow:0 14px 26px rgba(198,64,30,.28)}
+  .btn-cream{background:var(--paper);color:var(--ink)}
+  .btn-cream:hover{background:var(--white);transform:translateY(-2px)}
+
+  /* ---------- mobile nav sheet ---------- */
+  .mobile-sheet{position:fixed;inset:78px 0 0 0;background:var(--paper);z-index:39;padding:30px 5%;display:none;flex-direction:column;gap:26px;font-size:20px;font-family:"Fraunces",serif;transform:translateY(-8px);opacity:0;pointer-events:none;transition:.28s}
+  .mobile-sheet.open{display:flex;opacity:1;transform:none;pointer-events:auto}
+  .mobile-sheet a{border-bottom:1px solid var(--line);padding-bottom:18px}
+
+  /* ---------- hero ---------- */
+  .hero{padding:64px 0 40px;display:grid;grid-template-columns:1.08fr .92fr;gap:70px;align-items:center}
+  .hero-eyebrow{font-size:14px;color:var(--ink-soft);margin-bottom:20px;max-width:340px}
+  h1{font-size:clamp(40px,4.6vw,60px);line-height:1.08;max-width:620px}
+  .hero-copy{font-size:17px;color:var(--ink-soft);max-width:480px;margin:24px 0 32px}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:34px}
+  .hero-trust{display:flex;gap:22px;flex-wrap:wrap;font-size:13px;color:var(--ink-soft)}
+  .hero-trust span{display:flex;align-items:center;gap:7px}
+  .hero-trust i{width:5px;height:5px;border-radius:50%;background:var(--gold);display:inline-block}
+
+  .pond{position:relative;aspect-ratio:1/1;max-width:460px;margin:0 auto}
+  .pond-caption{text-align:center;margin-top:18px;font-family:"Fraunces",serif;font-size:14px;font-style:normal;color:var(--ink-soft)}
+  .koi-svg{width:100%;height:100%;animation:spin 34s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .koi-svg .fin-detail{animation:none}
+
+  /* ---------- strip ---------- */
+  .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:34px 0}
+  .strip-row{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .strip-item{display:flex;gap:14px;align-items:flex-start}
+  .strip-ring{width:30px;height:30px;flex-shrink:0;margin-top:2px}
+  .strip-item p{font-size:14.5px;color:var(--ink-soft);max-width:280px}
+
+  /* ---------- section shell ---------- */
+  .section{padding:120px 0}
+  .section-head{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:56px}
+  .section-head h2{font-size:clamp(30px,3.4vw,42px);line-height:1.12}
+  .section-head p{color:var(--ink-soft);font-size:15.5px;max-width:400px}
+
+  /* ---------- bento features ---------- */
+  .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+  .card{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:32px;position:relative;overflow:hidden;transition:.3s}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#E0CDB4}
+  .card.large{grid-column:span 3}
+  .card.medium{grid-column:span 3}
+  .card.small{grid-column:span 2}
+  .card-ring{width:44px;height:44px;margin-bottom:26px}
+  .card h3{font-size:19px;margin-bottom:10px;font-weight:560}
+  .card p{font-size:14px;color:var(--ink-soft)}
+  .card .tag{position:absolute;top:26px;right:28px;font-size:11px;color:var(--koi);border:1px solid #F4D8BF;background:var(--paper-deep);padding:5px 10px;border-radius:99px}
+
+  /* ---------- process ---------- */
+  .process{background:var(--ink);border-radius:28px;padding:64px 56px;color:var(--paper)}
+  .process .section-head p, .process .section-head{color:var(--paper)}
+  .process-head p{color:#C9BAA8;max-width:460px;font-size:15px;margin-top:14px}
+  .process-head h2{color:var(--paper)}
+  .stream{position:relative;margin-top:58px}
+  .stream-line{width:100%;height:2px;display:block;margin-bottom:0}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:-1px}
+  .step{padding-top:26px;position:relative}
+  .step::before{content:"";position:absolute;top:0;left:0;width:9px;height:9px;border-radius:50%;background:var(--gold);transform:translate(-50%,-50%)}
+  .step .num{font-family:"Fraunces",serif;font-size:13px;color:var(--gold);margin-bottom:10px;display:block}
+  .step h3{color:var(--paper);font-size:18px;margin-bottom:8px}
+  .step p{font-size:13.5px;color:#B7A794}
+
+  /* ---------- deep dive ---------- */
+  .dive{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+  .dive + .dive{margin-top:130px}
+  .dive.reverse .dive-copy{order:2}
+  .dive.reverse .dive-visual{order:1}
+  .dive-kicker{font-size:13px;color:var(--koi);margin-bottom:14px}
+  .dive-copy h2{font-size:clamp(26px,2.8vw,34px);margin-bottom:18px;line-height:1.16}
+  .dive-copy p{color:var(--ink-soft);font-size:15.5px;margin-bottom:22px;max-width:440px}
+  .dive-list{display:flex;flex-direction:column;gap:12px}
+  .dive-list li{list-style:none;display:flex;gap:11px;font-size:14.5px;color:var(--ink)}
+  .dive-list svg{flex-shrink:0;margin-top:3px}
+
+  .mock{background:var(--white);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+  .mock-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+  .mock-dot-row{display:flex;gap:6px}
+  .mock-dot{width:8px;height:8px;border-radius:50%;background:var(--line)}
+  .mock-title{font-size:12.5px;color:var(--ink-soft)}
+
+  .score-panel{background:var(--ink);border-radius:16px;padding:22px;display:flex;justify-content:space-between;align-items:center;color:var(--paper);margin-bottom:14px}
+  .score-panel .num-big{font-family:"Fraunces",serif;font-size:46px;line-height:1}
+  .score-panel .num-big b{font-size:16px;color:#C9BAA8;font-weight:500}
+  .score-panel .label{font-size:12px;color:#C9BAA8;margin-bottom:6px}
+  .enso-ring{width:70px;height:70px}
+
+  .row-mini{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mini-box{border:1px solid var(--line);border-radius:14px;padding:15px}
+  .mini-box h4{font-size:12.5px;margin-bottom:8px;color:var(--ink-soft);font-weight:600}
+  .skill-bar{height:6px;border-radius:4px;background:var(--paper-deep);overflow:hidden;margin-top:8px}
+  .skill-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--saffron));border-radius:4px}
+
+  .chat-mock .line{display:flex;gap:10px;margin-bottom:12px;font-size:13px}
+  .chat-mock .avatar{width:26px;height:26px;border-radius:50%;flex-shrink:0}
+  .chat-mock .bubble{background:var(--paper-deep);border-radius:12px;padding:10px 13px;color:var(--ink-soft);max-width:88%}
+  .chat-mock .bubble.you{background:var(--ink);color:var(--paper)}
+  .chat-mock .you-row{justify-content:flex-end}
+
+  /* ---------- quote ---------- */
+  .quote{padding:120px 0;text-align:center;position:relative}
+  .quote-mark{width:46px;height:46px;margin:0 auto 30px}
+  blockquote{font-family:"Fraunces",serif;font-weight:500;font-size:clamp(26px,3.2vw,40px);line-height:1.28;max-width:820px;margin:0 auto;color:var(--ink)}
+  .quote cite{display:block;margin-top:26px;font-size:13px;color:var(--ink-soft);font-style:normal}
+
+  /* ---------- cta ---------- */
+  .cta{background:linear-gradient(125deg,#FF7A3D,var(--koi));border-radius:28px;padding:64px;color:var(--white);display:flex;justify-content:space-between;align-items:center;gap:40px;position:relative;overflow:hidden}
+  .cta::before{content:"";position:absolute;width:1px;height:1px;box-shadow:0 0 0 1px rgba(255,255,255,.18);border-radius:50%;width:340px;height:340px;right:-90px;top:-140px}
+  .cta::after{content:"";position:absolute;width:210px;height:210px;box-shadow:0 0 0 1px rgba(255,255,255,.28);border-radius:50%;right:-10px;bottom:-120px}
+  .cta h2{color:var(--white);font-size:clamp(28px,3vw,38px);max-width:520px}
+  .cta p{color:#FFE2CC;margin-top:12px;font-size:14.5px;max-width:440px}
+  .cta-right{position:relative;z-index:1;flex-shrink:0}
+
+  /* ---------- footer ---------- */
+  footer{padding:60px 0 40px;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;border-top:1px solid var(--line)}
+  .footer-brand{display:flex;align-items:center;gap:10px;font-family:"Fraunces",serif;font-weight:600;font-size:17px;margin-bottom:8px}
+  .footer-brand svg{width:26px;height:26px}
+  footer .tagline{font-size:13px;color:var(--ink-soft);max-width:280px}
+  .footer-links{display:flex;gap:26px;font-size:13px;color:var(--ink-soft)}
+  .footer-meta{font-size:12.5px;color:var(--ink-soft)}
+
+  /* ---------- toast ---------- */
+  .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);background:var(--ink);color:var(--paper);padding:13px 20px;border-radius:12px;font-size:13.5px;opacity:0;pointer-events:none;transition:.3s;z-index:100}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+
+  @media(prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .koi-svg{animation:none}
+  }
+
+  /* ---------- responsive ---------- */
+  @media(max-width:980px){
+    .hero{grid-template-columns:1fr;gap:50px;text-align:left}
+    .pond{max-width:340px}
+    .dive{grid-template-columns:1fr}
+    .dive.reverse .dive-copy{order:1}
+    .dive.reverse .dive-visual{order:2}
+    .process{padding:44px 30px}
+    .steps{grid-template-columns:1fr 1fr;row-gap:36px}
+  }
+  @media(max-width:760px){
+    .nav-links{display:none}
+    .menu-btn{display:block}
+    .strip-row{grid-template-columns:1fr;gap:20px}
+    .section{padding:80px 0}
+    .section-head{grid-template-columns:1fr}
+    .bento{grid-template-columns:1fr 1fr}
+    .card.large,.card.medium{grid-column:span 2}
+    .card.small{grid-column:span 1}
+    .steps{grid-template-columns:1fr}
+    .cta{flex-direction:column;text-align:left;padding:44px 30px}
+    .dive-copy p{max-width:none}
+    footer{flex-direction:column;align-items:flex-start}
+  }
+  @media(max-width:480px){
+    .bento{grid-template-columns:1fr}
+    .card.large,.card.medium,.card.small{grid-column:span 1}
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<header class="nav" id="nav">
+  <div class="container nav-row">
+    <a class="brand" href="#top">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="18" stroke="var(--ink)" stroke-width="1.3" opacity=".35"/>
+        <circle cx="20" cy="20" r="12" fill="var(--paper-deep)"/>
+        <path d="M20,8 A12,12 0 0,1 20,32 A6,6 0 0,1 20,20 A6,6 0 0,0 20,8 Z" fill="var(--saffron)"/>
+        <circle cx="20" cy="12" r="1.4" fill="var(--paper)"/>
+      </svg>
+      CareerAI
+    </a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#studio">Interview studio</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="btn btn-line" onclick="showToast('Demo login selected')">Sign in</button>
+      <a class="btn btn-solid" href="#start">Get started</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-sheet" id="mobileSheet">
+  <a href="#how">How it works</a>
+  <a href="#features">Features</a>
+  <a href="#studio">Interview studio</a>
+  <a href="#start">Get started</a>
+</div>
+
+<main id="top">
+<section class="container hero">
+  <div>
+    <p class="hero-eyebrow">A resume and interview workspace, built for students who'd rather prepare than guess.</p>
+    <h1>Somewhere between doubt and the interview room, there is clarity.</h1>
+    <p class="hero-copy">CareerAI reads your resume the way a mentor would — naming what's strong, flagging what's missing, and turning it into questions you can actually rehearse.</p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="#start">Analyze my resume</a>
+      <a class="btn btn-line" href="#how">See how it works</a>
+    </div>
+    <div class="hero-trust">
+      <span><i></i> Resume &amp; ATS review</span>
+      <span><i></i> Skill gap mapping</span>
+      <span><i></i> Mock interview practice</span>
+    </div>
+  </div>
+
+  <div>
+    <div class="pond">
+      <svg class="koi-svg" viewBox="0 0 240 240" fill="none">
+        <path d="M120,14 A106,106 0 0,1 226,120" stroke="var(--ink)" stroke-width="1.4" stroke-linecap="round" opacity=".28"/>
+        <path d="M226,120 A106,106 0 0,1 120,226" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round" opacity=".3"/>
+        <path d="M120,226 A106,106 0 0,1 16,126" stroke="var(--ink)" stroke-width="1.3" stroke-linecap="round" opacity=".26"/>
+        <path d="M18,110 A106,106 0 0,1 108,15" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round" opacity=".32"/>
+
+        <circle cx="120" cy="120" r="78" fill="var(--paper-deep)"/>
+
+        <g class="fin-detail">
+          <path d="M120,44 A76,76 0 0,1 120,196 A38,38 0 0,1 120,120 A38,38 0 0,0 120,44 Z" fill="var(--saffron)"/>
+          <path d="M120,196 A76,76 0 0,1 120,44 A38,38 0 0,1 120,120 A38,38 0 0,0 120,196 Z" fill="var(--paper)"/>
+
+          <path d="M118,50 C126,58 130,70 122,80 C114,72 112,58 118,50 Z" fill="var(--gold)" opacity=".85"/>
+          <circle cx="120" cy="66" r="3.4" fill="var(--ink)"/>
+          <path d="M108,58 L96,52 M108,64 L94,64" stroke="var(--ink)" stroke-width="1.2" stroke-linecap="round" opacity=".5"/>
+          <path d="M132,182 L142,190 M128,188 L136,198" stroke="var(--saffron)" stroke-width="2" stroke-linecap="round"/>
+
+          <path d="M122,190 C130,182 126,170 118,160 C126,172 122,184 122,190 Z" fill="var(--koi)" opacity=".8"/>
+          <circle cx="120" cy="174" r="3.4" fill="var(--paper)"/>
+          <path d="M132,182 L144,178 M132,188 L146,190" stroke="var(--paper)" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+          <path d="M108,58 L98,50 M104,52 L94,42" stroke="var(--koi)" stroke-width="2" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+    <p class="pond-caption">Every koi swims upstream before it becomes a dragon.</p>
+  </div>
+</section>
+
+<section class="strip">
+  <div class="container strip-row">
+    <div class="strip-item">
+      <svg class="strip-ring" viewBox="0 0 30 30"><circle cx="15" cy="15" r="12" stroke="var(--koi)" stroke-width="1.4" fill="none" opacity=".5"/><circle cx="15" cy="15" r="4" fill="var(--saffron)"/></svg>
+      <p>One upload gives you a section-by-section read of your resume, not just a single pass/fail number.</p>
+    </div>
+    <div class="strip-item">
+      <svg class="strip-ring" viewBox="0 0 30 30"><circle cx="15" cy="15" r="12" stroke="var(--koi)" stroke-width="1.4" fill="none" opacity=".5"/><circle cx="15" cy="15" r="4" fill="var(--saffron)"/></svg>
+      <p>Interview questions are pulled from the role and company you're actually targeting, not a generic bank.</p>
+    </div>
+    <div class="strip-item">
+      <svg class="strip-ring" viewBox="0 0 30 30"><circle cx="15" cy="15" r="12" stroke="var(--koi)" stroke-width="1.4" fill="none" opacity=".5"/><circle cx="15" cy="15" r="4" fill="var(--saffron)"/></svg>
+      <p>Every practice session is logged, so improvement is something you can point to, not just something you feel.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section container" id="features">
+  <div class="section-head">
+    <h2>Six ways to stop guessing and start preparing.</h2>
+    <p>A resume tells one story. CareerAI helps you read it clearly, close the gaps it reveals, and rehearse the conversation it leads to.</p>
+  </div>
+
+  <div class="bento">
+    <article class="card large">
+      <span class="tag">Core</span>
+      <svg class="card-ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="17" stroke="var(--koi)" stroke-width="1.3" fill="none" opacity=".4"/><path d="M22,6 A16,16 0 0,1 22,38 A8,8 0 0,1 22,22 A8,8 0 0,0 22,6 Z" fill="var(--saffron)"/></svg>
+      <h3>Resume intelligence</h3>
+      <p>An ATS-style score paired with section-level notes on structure, clarity and impact — the kind of feedback you'd get from a mentor who's read a thousand resumes.</p>
+    </article>
+
+    <article class="card large">
+      <svg class="card-ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="17" stroke="var(--koi)" stroke-width="1.3" fill="none" opacity=".4"/><path d="M22,6 A16,16 0 0,1 22,38 A8,8 0 0,1 22,22 A8,8 0 0,0 22,6 Z" fill="var(--gold)"/></svg>
+      <h3>Skill gap map</h3>
+      <p>Set a target role and see it side by side with your profile — which strengths already carry weight, and which skills are worth building before you apply.</p>
+    </article>
+
+    <article class="card medium">
+      <svg class="card-ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="17" stroke="var(--koi)" stroke-width="1.3" fill="none" opacity=".4"/><circle cx="22" cy="22" r="8" fill="var(--saffron)"/></svg>
+      <h3>Interview studio</h3>
+      <p>Rehearse with an AI interviewer that asks role-specific questions, then review your answers afterward.</p>
+    </article>
+
+    <article class="card medium">
+      <svg class="card-ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="17" stroke="var(--koi)" stroke-width="1.3" fill="none" opacity=".4"/><circle cx="22" cy="22" r="8" fill="var(--gold)"/></svg>
+      <h3>Job-specific preparation</h3>
+      <p>Move from broad studying to the exact topics and questions tied to the opportunity you want.</p>
+    </article>
+
+    <article class="card small">
+      <svg class="card-ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="15" stroke="var(--koi)" stroke-width="1.3" fill="none" opacity=".4"/></svg>
+      <h3>Progress you can see</h3>
+      <p>Every practice round is tracked, so growth stays visible over time.</p>
+    </article>
+
+    <article class="card small">
+      <svg class="card-ring" viewBox="0 0 44 44"><circle cx="22" cy="22" r="15" stroke="var(--koi)" stroke-width="1.3" fill="none" opacity=".4"/></svg>
+      <h3>One career profile</h3>
+      <p>Strengths, goals and preparation history, kept in a single living record.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section container" id="how">
+  <div class="process">
+    <div class="process-head">
+      <div class="section-kicker" style="color:var(--gold);font-size:13px;">A simple process</div>
+      <h2>From "am I ready?" to "I know exactly what to work on."</h2>
+      <p>Four stages, each one building on what the last one uncovered.</p>
+    </div>
+
+    <div class="stream">
+      <svg class="stream-line" viewBox="0 0 1000 6" preserveAspectRatio="none"><path d="M0,3 Q125,0 250,3 T500,3 T750,3 T1000,3" stroke="#4E4133" stroke-width="1.3" fill="none"/></svg>
+      <div class="steps">
+        <div class="step"><span class="num">01</span><h3>Upload</h3><p>Bring your current resume into a private career workspace.</p></div>
+        <div class="step"><span class="num">02</span><h3>Understand</h3><p>See your score, strengths, gaps and the areas worth improving first.</p></div>
+        <div class="step"><span class="num">03</span><h3>Prepare</h3><p>Pick a target role and rehearse the questions it's likely to bring.</p></div>
+        <div class="step"><span class="num">04</span><h3>Improve</h3><p>Come back, review your progress, and return with a sharper profile.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section container" id="studio">
+  <div class="dive">
+    <div class="dive-copy">
+      <div class="dive-kicker">Resume intelligence</div>
+      <h2>Feedback that reads like a mentor, not a scanner.</h2>
+      <p>Most resume checkers stop at a number. CareerAI explains what's behind it — which sections carry your story well, which ones undersell you, and what to rewrite first.</p>
+      <ul class="dive-list">
+        <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" stroke="var(--koi)" fill="none"/><path d="M5,8 L7,10 L11,5.5" stroke="var(--koi)" stroke-width="1.4" fill="none"/></svg> Section-by-section observations, not a single pass/fail score</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" stroke="var(--koi)" fill="none"/><path d="M5,8 L7,10 L11,5.5" stroke="var(--koi)" stroke-width="1.4" fill="none"/></svg> Suggestions for stronger phrasing and structure</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" stroke="var(--koi)" fill="none"/><path d="M5,8 L7,10 L11,5.5" stroke="var(--koi)" stroke-width="1.4" fill="none"/></svg> A skill comparison against the role you're aiming for</li>
+      </ul>
+    </div>
+    <div class="dive-visual">
+      <div class="mock">
+        <div class="mock-bar"><span class="mock-title">Your career snapshot</span><div class="mock-dot-row"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div></div>
+        <div class="score-panel">
+          <div><div class="label">Resume readiness</div><div class="num-big">82 <b>/ 100</b></div></div>
+          <svg class="enso-ring" viewBox="0 0 70 70"><circle cx="35" cy="35" r="28" fill="none" stroke="#4E4133" stroke-width="6"/><circle cx="35" cy="35" r="28" fill="none" stroke="var(--gold)" stroke-width="6" stroke-dasharray="176" stroke-dashoffset="32" stroke-linecap="round" transform="rotate(-90 35 35)"/></svg>
+        </div>
+        <div class="row-mini">
+          <div class="mini-box"><h4>Skill alignment</h4>8 strong · 3 developing<div class="skill-bar"><i style="width:74%"></i></div></div>
+          <div class="mini-box"><h4>Interview readiness</h4>Next: product thinking<div class="skill-bar"><i style="width:60%"></i></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dive reverse">
+    <div class="dive-copy">
+      <div class="dive-kicker">Interview studio</div>
+      <h2>Practice the conversation before it counts.</h2>
+      <p>Choose a company and a role, and the studio builds a set of questions to match — then lets you answer out loud or in writing, and tells you honestly how it went.</p>
+      <ul class="dive-list">
+        <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" stroke="var(--koi)" fill="none"/><path d="M5,8 L7,10 L11,5.5" stroke="var(--koi)" stroke-width="1.4" fill="none"/></svg> Questions generated for the specific job you're preparing for</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" stroke="var(--koi)" fill="none"/><path d="M5,8 L7,10 L11,5.5" stroke="var(--koi)" stroke-width="1.4" fill="none"/></svg> A review after every session, not just a transcript</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" stroke="var(--koi)" fill="none"/><path d="M5,8 L7,10 L11,5.5" stroke="var(--koi)" stroke-width="1.4" fill="none"/></svg> A history you can return to before the real interview</li>
+      </ul>
+    </div>
+    <div class="dive-visual">
+      <div class="mock chat-mock">
+        <div class="mock-bar"><span class="mock-title">Mock interview · Product Analyst</span><div class="mock-dot-row"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div></div>
+        <div class="line"><span class="avatar" style="background:var(--saffron)"></span><div class="bubble">Tell me about a time you used data to change a product decision.</div></div>
+        <div class="line you-row"><div class="bubble you">In my last internship, I noticed drop-off on the onboarding screen, so I proposed an A/B test that cut it by 18%.</div></div>
+        <div class="line"><span class="avatar" style="background:var(--saffron)"></span><div class="bubble">Good — try naming the metric you tracked before the change, too.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote container">
+  <svg class="quote-mark" viewBox="0 0 46 46"><circle cx="23" cy="23" r="19" stroke="var(--koi)" stroke-width="1.4" fill="none" opacity=".5"/><circle cx="23" cy="23" r="6" fill="var(--saffron)"/></svg>
+  <blockquote>We didn't want to build another app that scores you. We wanted to build the mentor students wish they'd had — one honest observation at a time.</blockquote>
+  <cite>— CareerAI, design principle</cite>
+</section>
+
+<section class="container section" id="start">
+  <div class="cta">
+    <div>
+      <h2>Start with the resume you have today.</h2>
+      <p>Upload it, understand it, and build a preparation plan around the role you actually want — not the one you think you should apply for.</p>
+    </div>
+    <div class="cta-right">
+      <button class="btn btn-cream" onclick="showToast('Resume upload will connect to the backend here.')">Upload your resume</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="container">
+  <div>
+    <div class="footer-brand">
+      <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="var(--ink)" stroke-width="1.3" opacity=".35"/><circle cx="20" cy="20" r="12" fill="var(--paper-deep)"/><path d="M20,8 A12,12 0 0,1 20,32 A6,6 0 0,1 20,20 A6,6 0 0,0 20,8 Z" fill="var(--saffron)"/></svg>
+      CareerAI
+    </div>
+    <p class="tagline">A career workspace for resume clarity, skill discovery and interview preparation.</p>
+  </div>
+  <div class="footer-links">
+    <a href="#features">Features</a>
+    <a href="#how">Process</a>
+    <a href="#studio">Studio</a>
+  </div>
+  <div class="footer-meta">© 2026 CareerAI · College Project</div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 8));
+
+  const menuBtn = document.getElementById('menuBtn');
+  const sheet = document.getElementById('mobileSheet');
+  menuBtn.addEventListener('click', () => {
+    menuBtn.classList.toggle('open');
+    sheet.classList.toggle('open');
+  });
+  sheet.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menuBtn.classList.remove('open'); sheet.classList.remove('open');
+  }));
+
+  function showToast(msg){
+    let t = document.querySelector('.toast');
+    if(!t){ t = document.createElement('div'); t.className = 'toast'; document.body.appendChild(t); }
+    t.textContent = msg;
+    t.classList.add('on');
+    clearTimeout(window.__toastTimer);
+    window.__toastTimer = setTimeout(() => t.classList.remove('on'), 2600);
+  }
+</script>
+</body>
+</html>
