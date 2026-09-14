@@ -9,17 +9,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,0..100&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --wine-deep:#12090A;
-    --wine-sec:#1C0C0D;
+    --ivory:#FBF3E2;
+    --ivory-deep:#F1E4C8;
+    --ink:#2B1712;
+    --ink-soft:#7A6753;
+    --maroon-950:#3A0A10;
+    --maroon-900:#5C0F19;
+    --maroon-800:#7A1420;
+    --maroon-700:#8F1B26;
+    --crimson-ruby:#C71924;
+    --gold-antique:#A96708;
     --gold-royal:#D99A16;
     --gold-champagne:#F4C64E;
-    --gold-antique:#A96708;
-    --crimson-deep:#8F0D15;
-    --crimson-ruby:#C71924;
-    --ivory-warm:#FFF8E8;
-    --ivory-muted:#CFC1A5;
-    --gold-border: rgba(217,154,22,0.20);
-    --gold-border-strong: rgba(217,154,22,0.38);
+    --card-border: rgba(122,20,32,0.14);
+    --gold-border: rgba(169,103,8,0.30);
   }
 
   *{margin:0;padding:0;box-sizing:border-box;}
@@ -27,8 +30,8 @@
   html{scroll-behavior:smooth;}
 
   body{
-    background:var(--wine-deep);
-    color:var(--ivory-warm);
+    background:var(--ivory);
+    color:var(--ink);
     font-family:'IBM Plex Sans', sans-serif;
     line-height:1.5;
     -webkit-font-smoothing:antialiased;
@@ -39,7 +42,7 @@
     font-family:'Fraunces', serif;
     font-weight:500;
     letter-spacing:-0.01em;
-    color:var(--ivory-warm);
+    color:var(--ink);
   }
 
   a{color:inherit;text-decoration:none;}
@@ -53,19 +56,19 @@
     z-index:0;
     pointer-events:none;
     background:
-      radial-gradient(ellipse 900px 600px at 82% -6%, rgba(217,154,22,0.10), transparent 60%),
-      radial-gradient(ellipse 700px 500px at 8% 18%, rgba(143,13,21,0.10), transparent 60%),
-      linear-gradient(var(--wine-deep), var(--wine-sec) 60%, var(--wine-deep));
+      radial-gradient(ellipse 900px 600px at 84% -8%, rgba(169,103,8,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 6% 14%, rgba(122,20,32,0.06), transparent 60%),
+      var(--ivory);
   }
   .grid-lines{
     position:fixed;
     inset:0;
     z-index:0;
     pointer-events:none;
-    opacity:0.05;
+    opacity:0.06;
     background-image:
-      linear-gradient(to right, var(--gold-royal) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--gold-royal) 1px, transparent 1px);
+      linear-gradient(to right, var(--gold-antique) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--gold-antique) 1px, transparent 1px);
     background-size: 64px 64px;
     mask-image: radial-gradient(ellipse 70% 60% at 50% 20%, black, transparent);
   }
@@ -83,23 +86,23 @@
   .brand-name{
     font-family:'Fraunces',serif;
     font-size:1.28rem;
-    font-weight:500;
+    font-weight:600;
     letter-spacing:0.01em;
-    color:var(--ivory-warm);
+    color:var(--maroon-800);
   }
   nav{display:flex;align-items:center;gap:40px;}
   .nav-links{display:flex;gap:32px;}
   .nav-links a{
     font-size:0.92rem;
-    color:var(--ivory-muted);
+    color:var(--ink-soft);
     transition:color .25s ease;
   }
-  .nav-links a:hover{color:var(--gold-champagne);}
+  .nav-links a:hover{color:var(--maroon-800);}
 
   .btn{
     display:inline-flex;align-items:center;gap:10px;
     padding:13px 26px;
-    border-radius:8px;
+    border-radius:10px;
     font-size:0.95rem;
     font-weight:500;
     font-family:'IBM Plex Sans',sans-serif;
@@ -110,31 +113,39 @@
   }
   .btn-primary{
     background:linear-gradient(135deg,var(--gold-antique),var(--gold-champagne));
-    color:var(--wine-deep);
+    color:var(--maroon-950);
     font-weight:600;
   }
   .btn-primary:hover{
     transform:translateY(-2px);
-    box-shadow:0 10px 30px -8px rgba(217,154,22,0.55);
+    box-shadow:0 12px 28px -10px rgba(169,103,8,0.45);
   }
   .btn-primary .arrow{transition:transform .25s ease;}
   .btn-primary:hover .arrow{transform:translateX(3px);}
 
   .btn-secondary{
-    background:rgba(255,248,232,0.02);
-    border:1px solid var(--gold-border-strong);
-    color:var(--ivory-warm);
+    background:transparent;
+    border:1px solid var(--maroon-800);
+    color:var(--maroon-800);
   }
   .btn-secondary:hover{
-    border-color:var(--gold-royal);
-    background:rgba(217,154,22,0.06);
+    background:rgba(122,20,32,0.06);
+  }
+
+  .btn-on-maroon{
+    background:transparent;
+    border:1px solid rgba(251,243,226,0.55);
+    color:var(--ivory);
+  }
+  .btn-on-maroon:hover{
+    background:rgba(251,243,226,0.10);
   }
 
   .btn-sm{padding:10px 20px;font-size:0.88rem;}
 
   /* ---------- hero ---------- */
   .hero{
-    padding:64px 32px 40px;
+    padding:44px 32px 40px;
     max-width:1180px;margin:0 auto;
     display:grid;
     grid-template-columns:1.05fr 0.95fr;
@@ -144,27 +155,27 @@
   .hero-eyebrow{
     display:inline-flex;align-items:center;gap:10px;
     font-size:0.85rem;
-    color:var(--ivory-muted);
+    color:var(--ink-soft);
     margin-bottom:26px;
   }
   .hero-eyebrow .dot{
     width:6px;height:6px;border-radius:50%;
-    background:var(--gold-champagne);
-    box-shadow:0 0 8px rgba(244,198,78,0.7);
+    background:var(--gold-royal);
+    box-shadow:0 0 8px rgba(217,154,22,0.55);
   }
   .hero h1{
-    font-size:3.4rem;
-    line-height:1.08;
+    font-size:3.3rem;
+    line-height:1.1;
     max-width:600px;
     margin-bottom:26px;
   }
   .hero h1 em{
     font-style:italic;
-    color:var(--gold-champagne);
+    color:var(--maroon-800);
   }
   .hero p.sub{
     font-size:1.1rem;
-    color:var(--ivory-muted);
+    color:var(--ink-soft);
     max-width:480px;
     margin-bottom:36px;
   }
@@ -173,57 +184,73 @@
   .proof-row{
     display:flex;gap:40px;
     padding-top:28px;
-    border-top:1px solid rgba(207,193,165,0.15);
+    border-top:1px solid rgba(122,20,32,0.14);
     max-width:520px;
   }
   .proof-row div{display:flex;flex-direction:column;gap:4px;}
   .proof-num{
     font-family:'Fraunces',serif;
     font-size:1.6rem;
-    color:var(--gold-champagne);
+    color:var(--maroon-800);
   }
-  .proof-label{font-size:0.82rem;color:var(--ivory-muted);}
+  .proof-label{font-size:0.82rem;color:var(--ink-soft);}
 
-  /* ---------- hero visual: score ring ---------- */
+  /* ---------- hero visual: maroon promo panel with score ring ---------- */
   .hero-visual{
     position:relative;
     display:flex;align-items:center;justify-content:center;
   }
+  .maroon-panel{
+    position:relative;
+    width:100%;
+    background:linear-gradient(160deg, var(--maroon-800), var(--maroon-900) 75%);
+    border-radius:22px;
+    padding:44px;
+    overflow:hidden;
+    box-shadow:0 24px 50px -20px rgba(58,10,16,0.45);
+  }
+  .maroon-panel::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(ellipse 420px 320px at 88% -10%, rgba(244,198,78,0.16), transparent 65%);
+  }
   .score-panel{
     position:relative;
     width:100%;
-    max-width:420px;
     aspect-ratio:1/1;
     display:flex;align-items:center;justify-content:center;
+    z-index:1;
   }
   .orbit-ring{
     position:absolute;
-    border:1px solid rgba(217,154,22,0.14);
+    border:1px solid rgba(251,243,226,0.14);
     border-radius:50%;
   }
   .orbit-ring.r1{inset:0;}
-  .orbit-ring.r2{inset:34px; border-style:dashed; border-color:rgba(207,193,165,0.12);}
+  .orbit-ring.r2{inset:34px; border-style:dashed; border-color:rgba(251,243,226,0.10);}
 
   .orbit-tag{
     position:absolute;
-    background:var(--wine-sec);
-    border:1px solid var(--gold-border);
+    background:rgba(58,10,16,0.55);
+    border:1px solid rgba(217,154,22,0.30);
     border-radius:7px;
     padding:7px 12px;
     font-size:0.76rem;
-    color:var(--ivory-muted);
+    color:var(--ivory);
     display:flex;align-items:center;gap:7px;
     white-space:nowrap;
+    backdrop-filter:blur(2px);
   }
   .orbit-tag .tag-dot{width:5px;height:5px;border-radius:50%;}
   .orbit-tag.t-resume{top:2%; left:8%;}
   .orbit-tag.t-resume .tag-dot{background:var(--gold-champagne);}
   .orbit-tag.t-skills{top:14%; right:-2%;}
-  .orbit-tag.t-skills .tag-dot{background:var(--crimson-ruby);}
+  .orbit-tag.t-skills .tag-dot{background:#F0A0A6;}
   .orbit-tag.t-interview{bottom:8%; left:-4%;}
   .orbit-tag.t-interview .tag-dot{background:var(--gold-champagne);}
   .orbit-tag.t-ready{bottom:0%; right:4%;}
-  .orbit-tag.t-ready .tag-dot{background:var(--crimson-ruby);}
+  .orbit-tag.t-ready .tag-dot{background:#F0A0A6;}
 
   .score-core{
     position:relative;
@@ -232,7 +259,7 @@
   }
   .score-core svg{width:100%;height:100%;transform:rotate(-90deg);}
   .score-core circle{fill:none;}
-  .ring-track{stroke:rgba(207,193,165,0.10); stroke-width:10;}
+  .ring-track{stroke:rgba(251,243,226,0.14); stroke-width:10;}
   .ring-progress{
     stroke:url(#goldArc);
     stroke-width:10;
@@ -249,14 +276,14 @@
     font-family:'Fraunces',serif;
     font-size:3.2rem;
     font-weight:500;
-    color:var(--ivory-warm);
+    color:var(--ivory);
     line-height:1;
   }
   .score-text .label{
     margin-top:6px;
     font-size:0.72rem;
     letter-spacing:0.06em;
-    color:var(--gold-royal);
+    color:var(--gold-champagne);
   }
 
   /* ---------- section shared ---------- */
@@ -271,7 +298,7 @@
     margin-bottom:16px;
   }
   .section-head p{
-    color:var(--ivory-muted);
+    color:var(--ink-soft);
     font-size:1.02rem;
     max-width:520px;
   }
@@ -279,7 +306,7 @@
     height:1px;
     max-width:1180px;
     margin:0 auto;
-    background:linear-gradient(to right, transparent, var(--gold-border) 20%, var(--gold-border) 80%, transparent);
+    background:linear-gradient(to right, transparent, var(--card-border) 20%, var(--card-border) 80%, transparent);
   }
 
   /* ---------- how it works (sequence) ---------- */
@@ -299,7 +326,7 @@
     left:10%;right:10%;
     height:1px;
     background:linear-gradient(to right, var(--gold-antique), var(--gold-champagne), var(--crimson-ruby));
-    opacity:0.45;
+    opacity:0.55;
   }
   .flow-step{
     position:relative;
@@ -309,11 +336,12 @@
   .flow-num{
     width:46px;height:46px;
     border-radius:50%;
-    border:1px solid var(--gold-border-strong);
-    background:var(--wine-sec);
+    border:1px solid var(--gold-border);
+    background:var(--ivory);
+    box-shadow:0 4px 14px -6px rgba(122,20,32,0.18);
     display:flex;align-items:center;justify-content:center;
     font-family:'Fraunces',serif;
-    color:var(--gold-champagne);
+    color:var(--maroon-800);
     font-size:1.02rem;
     margin-bottom:22px;
     z-index:1;
@@ -325,7 +353,7 @@
   }
   .flow-step p{
     font-size:0.88rem;
-    color:var(--ivory-muted);
+    color:var(--ink-soft);
     max-width:200px;
   }
 
@@ -335,25 +363,25 @@
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:1px;
-    background:rgba(207,193,165,0.12);
-    border:1px solid rgba(207,193,165,0.12);
-    border-radius:14px;
+    background:var(--card-border);
+    border:1px solid var(--card-border);
+    border-radius:16px;
     overflow:hidden;
   }
   .feature{
-    background:var(--wine-deep);
+    background:var(--ivory);
     padding:36px 32px;
     display:flex;flex-direction:column;
     gap:16px;
   }
   .feature.accent{
-    background:linear-gradient(165deg, rgba(143,13,21,0.16), var(--wine-deep) 55%);
+    background:linear-gradient(165deg, rgba(199,25,36,0.07), var(--ivory) 55%);
   }
   .feature-icon{
     width:38px;height:38px;
   }
   .feature h3{font-size:1.08rem;font-weight:500;}
-  .feature p{font-size:0.9rem;color:var(--ivory-muted);}
+  .feature p{font-size:0.9rem;color:var(--ink-soft);}
 
   /* ---------- ats deep dive ---------- */
   .ats-section{
@@ -365,47 +393,48 @@
     padding:100px 32px;
   }
   .ats-copy h2{font-size:2.1rem;margin-bottom:18px;line-height:1.18;}
-  .ats-copy p{color:var(--ivory-muted);margin-bottom:28px;max-width:440px;}
+  .ats-copy p{color:var(--ink-soft);margin-bottom:28px;max-width:440px;}
 
   .breakdown{display:flex;flex-direction:column;gap:18px;max-width:440px;}
   .bd-row{display:flex;flex-direction:column;gap:8px;}
   .bd-top{display:flex;justify-content:space-between;font-size:0.86rem;}
-  .bd-top .name{color:var(--ivory-warm);}
-  .bd-top .val{color:var(--gold-champagne);font-family:'Fraunces',serif;}
+  .bd-top .name{color:var(--ink);}
+  .bd-top .val{color:var(--maroon-800);font-family:'Fraunces',serif;}
   .bd-top .val.crimson{color:var(--crimson-ruby);}
-  .bd-track{height:6px;border-radius:4px;background:rgba(207,193,165,0.10);overflow:hidden;}
+  .bd-track{height:6px;border-radius:4px;background:rgba(122,20,32,0.10);overflow:hidden;}
   .bd-fill{height:100%;border-radius:4px;}
   .bd-fill.gold{background:linear-gradient(90deg,var(--gold-antique),var(--gold-champagne));}
-  .bd-fill.crimson{background:linear-gradient(90deg,var(--crimson-deep),var(--crimson-ruby));}
+  .bd-fill.crimson{background:linear-gradient(90deg,var(--maroon-800),var(--crimson-ruby));}
 
   .ats-panel{
-    background:var(--wine-sec);
-    border:1px solid var(--gold-border);
-    border-radius:16px;
+    background:#FFFDF8;
+    border:1px solid var(--card-border);
+    border-radius:18px;
     padding:44px;
     position:relative;
     overflow:hidden;
+    box-shadow:0 20px 44px -24px rgba(122,20,32,0.18);
   }
   .ats-panel::before{
     content:"";
     position:absolute;
     width:340px;height:340px;
     border-radius:50%;
-    border:1px solid rgba(217,154,22,0.08);
+    border:1px solid rgba(169,103,8,0.10);
     top:-120px;right:-120px;
   }
   .ats-row{
     display:flex;align-items:center;justify-content:space-between;
     padding:16px 0;
-    border-bottom:1px solid rgba(207,193,165,0.10);
+    border-bottom:1px solid rgba(122,20,32,0.10);
     font-size:0.92rem;
   }
   .ats-row:last-child{border-bottom:none;}
   .ats-row .kw{display:flex;align-items:center;gap:10px;}
   .ats-row .kw .dot{width:7px;height:7px;border-radius:50%;}
-  .kw .dot.match{background:var(--gold-champagne);}
+  .kw .dot.match{background:var(--gold-royal);}
   .kw .dot.missing{background:var(--crimson-ruby);}
-  .ats-row .status{font-size:0.78rem;color:var(--ivory-muted);}
+  .ats-row .status{font-size:0.78rem;color:var(--ink-soft);}
   .ats-row .status.missing{color:var(--crimson-ruby);}
 
   /* ---------- editorial quote ---------- */
@@ -417,7 +446,7 @@
   .quote-mark{
     font-family:'Fraunces',serif;
     font-size:4rem;
-    color:var(--gold-royal);
+    color:var(--gold-antique);
     line-height:0.5;
     margin-bottom:24px;
     display:block;
@@ -427,23 +456,22 @@
     font-size:1.7rem;
     line-height:1.42;
     font-weight:400;
-    color:var(--ivory-warm);
+    color:var(--ink);
     margin-bottom:28px;
   }
   .quote-attr{display:flex;align-items:center;gap:14px;}
-  .quote-attr .line{width:32px;height:1px;background:var(--gold-royal);}
-  .quote-attr .who{font-size:0.92rem;color:var(--ivory-muted);}
-  .quote-attr .who b{color:var(--ivory-warm);font-weight:500;}
+  .quote-attr .line{width:32px;height:1px;background:var(--gold-antique);}
+  .quote-attr .who{font-size:0.92rem;color:var(--ink-soft);}
+  .quote-attr .who b{color:var(--ink);font-weight:500;}
 
   /* ---------- closing cta ---------- */
   .closing{
     max-width:1180px;margin:0 auto;
-    padding:80px 32px 120px;
+    padding:20px 32px 120px;
   }
   .closing-panel{
-    background:var(--wine-sec);
-    border:1px solid var(--gold-border-strong);
-    border-radius:20px;
+    background:linear-gradient(160deg, var(--maroon-800), var(--maroon-900) 75%);
+    border-radius:22px;
     padding:72px 64px;
     display:flex;
     align-items:center;
@@ -451,14 +479,15 @@
     gap:40px;
     position:relative;
     overflow:hidden;
+    box-shadow:0 24px 50px -20px rgba(58,10,16,0.4);
   }
   .closing-panel::after{
     content:"";
     position:absolute;
     inset:0;
-    background:radial-gradient(ellipse 500px 300px at 90% 0%, rgba(217,154,22,0.10), transparent 70%);
+    background:radial-gradient(ellipse 500px 300px at 90% 0%, rgba(244,198,78,0.14), transparent 70%);
   }
-  .closing-panel h2{font-size:2rem;max-width:440px;position:relative;z-index:1;}
+  .closing-panel h2{font-size:2rem;max-width:440px;position:relative;z-index:1;color:var(--ivory);}
   .closing-ctas{display:flex;gap:16px;position:relative;z-index:1;flex-shrink:0;}
 
   /* ---------- footer ---------- */
@@ -468,17 +497,17 @@
     display:flex;
     justify-content:space-between;
     align-items:center;
-    border-top:1px solid rgba(207,193,165,0.12);
+    border-top:1px solid var(--card-border);
   }
   .foot-brand{display:flex;align-items:center;gap:10px;}
   .foot-brand svg{width:22px;height:22px;}
-  .foot-brand span{font-family:'Fraunces',serif;font-size:1rem;color:var(--ivory-muted);}
-  .foot-links{display:flex;gap:28px;font-size:0.86rem;color:var(--ivory-muted);}
-  .foot-links a:hover{color:var(--gold-champagne);}
+  .foot-brand span{font-family:'Fraunces',serif;font-size:1rem;color:var(--maroon-800);font-weight:600;}
+  .foot-links{display:flex;gap:28px;font-size:0.86rem;color:var(--ink-soft);}
+  .foot-links a:hover{color:var(--maroon-800);}
 
   /* ---------- responsive ---------- */
   @media (max-width:920px){
-    .hero{grid-template-columns:1fr;gap:60px;padding-top:40px;}
+    .hero{grid-template-columns:1fr;gap:44px;padding-top:20px;}
     .hero h1{font-size:2.5rem;max-width:100%;}
     .hero p.sub{max-width:100%;}
     .hero-visual{order:-1;}
@@ -495,6 +524,7 @@
     section{padding:70px 20px;}
     .quote-section blockquote{font-size:1.35rem;}
     .closing-panel{padding:48px 32px;}
+    .maroon-panel{padding:28px;}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -510,9 +540,9 @@
 <header>
   <div class="brand">
     <svg viewBox="0 0 40 40" fill="none">
-      <circle cx="20" cy="20" r="18" stroke="url(#markGold)" stroke-width="1.4" opacity="0.55"/>
+      <circle cx="20" cy="20" r="18" stroke="url(#markGold)" stroke-width="1.4" opacity="0.7"/>
       <path d="M20 6 A14 14 0 0 1 34 20" stroke="url(#markGold)" stroke-width="2.2" stroke-linecap="round"/>
-      <path d="M20 34 A14 14 0 0 1 6 20" stroke="#8F0D15" stroke-width="2.2" stroke-linecap="round" opacity="0.85"/>
+      <path d="M20 34 A14 14 0 0 1 6 20" stroke="#7A1420" stroke-width="2.2" stroke-linecap="round" opacity="0.85"/>
       <circle cx="20" cy="20" r="4" fill="url(#markGold)"/>
       <defs>
         <linearGradient id="markGold" x1="0" y1="0" x2="40" y2="40">
@@ -537,7 +567,7 @@
 <main>
 
   <!-- HERO -->
-  <section class="hero" style="padding-top:56px;">
+  <section class="hero" style="padding-top:36px;">
     <div class="hero-copy">
       <div class="hero-eyebrow"><span class="dot"></span> Built for candidates who read the fine print</div>
       <h1>Know exactly what stands between you and the <em>offer</em>.</h1>
@@ -554,29 +584,31 @@
     </div>
 
     <div class="hero-visual">
-      <div class="score-panel">
-        <div class="orbit-ring r1"></div>
-        <div class="orbit-ring r2"></div>
-        <div class="orbit-tag t-resume"><span class="tag-dot"></span>Resume parsed</div>
-        <div class="orbit-tag t-skills"><span class="tag-dot"></span>3 gaps found</div>
-        <div class="orbit-tag t-interview"><span class="tag-dot"></span>Interview prep</div>
-        <div class="orbit-tag t-ready"><span class="tag-dot"></span>Ready to send</div>
+      <div class="maroon-panel">
+        <div class="score-panel">
+          <div class="orbit-ring r1"></div>
+          <div class="orbit-ring r2"></div>
+          <div class="orbit-tag t-resume"><span class="tag-dot"></span>Resume parsed</div>
+          <div class="orbit-tag t-skills"><span class="tag-dot"></span>3 gaps found</div>
+          <div class="orbit-tag t-interview"><span class="tag-dot"></span>Interview prep</div>
+          <div class="orbit-tag t-ready"><span class="tag-dot"></span>Ready to send</div>
 
-        <div class="score-core">
-          <svg viewBox="0 0 210 210">
-            <defs>
-              <linearGradient id="goldArc" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#A96708"/>
-                <stop offset="0.55" stop-color="#D99A16"/>
-                <stop offset="1" stop-color="#F4C64E"/>
-              </linearGradient>
-            </defs>
-            <circle class="ring-track" cx="105" cy="105" r="94"/>
-            <circle class="ring-progress" id="scoreRing" cx="105" cy="105" r="94"/>
-          </svg>
-          <div class="score-text">
-            <span class="num" id="scoreNum">0</span>
-            <span class="label">ATS SCORE</span>
+          <div class="score-core">
+            <svg viewBox="0 0 210 210">
+              <defs>
+                <linearGradient id="goldArc" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#A96708"/>
+                  <stop offset="0.55" stop-color="#D99A16"/>
+                  <stop offset="1" stop-color="#F4C64E"/>
+                </linearGradient>
+              </defs>
+              <circle class="ring-track" cx="105" cy="105" r="94"/>
+              <circle class="ring-progress" id="scoreRing" cx="105" cy="105" r="94"/>
+            </svg>
+            <div class="score-text">
+              <span class="num" id="scoreNum">0</span>
+              <span class="label">ATS SCORE</span>
+            </div>
           </div>
         </div>
       </div>
@@ -611,185 +643,4 @@
         </div>
         <div class="flow-step">
           <div class="flow-num">4</div>
-          <h3>Interview</h3>
-          <p>Practice the questions your specific background is likely to draw, with feedback after each one.</p>
-        </div>
-        <div class="flow-step">
-          <div class="flow-num">5</div>
-          <h3>Readiness</h3>
-          <p>A single readiness score that tells you when the application is genuinely ready to send.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-  <section id="features">
-    <div class="section-head">
-      <h2>Everything a careful applicant checks by hand — done in ninety seconds.</h2>
-      <p>Laurel replaces the folder of tabs, forums, and guesswork with one system that shows its reasoning.</p>
-    </div>
-    <div class="feature-grid">
-      <div class="feature">
-        <svg class="feature-icon" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="14" stroke="#D99A16" stroke-width="1.4"/><path d="M19 10v9l6 4" stroke="#F4C64E" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <h3>Keyword precision</h3>
-        <p>Matches your resume against the exact language of the job description, not a generic keyword list.</p>
-      </div>
-      <div class="feature accent">
-        <svg class="feature-icon" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="14" stroke="#C71924" stroke-width="1.4"/><path d="M13 19h12M19 13v12" stroke="#C71924" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <h3>Gap detection</h3>
-        <p>Flags missing skills and unproven claims before a recruiter does — with a plan to address each one.</p>
-      </div>
-      <div class="feature">
-        <svg class="feature-icon" viewBox="0 0 38 38" fill="none"><path d="M9 26l7-14 6 9 4-6 3 5" stroke="#D99A16" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
-        <h3>Formatting check</h3>
-        <p>Catches tables, columns, and graphics that quietly break parsing in applicant tracking systems.</p>
-      </div>
-      <div class="feature">
-        <svg class="feature-icon" viewBox="0 0 38 38" fill="none"><rect x="9" y="9" width="20" height="20" rx="4" stroke="#D99A16" stroke-width="1.4"/><path d="M14 19h10M14 24h6" stroke="#F4C64E" stroke-width="1.4" stroke-linecap="round"/></svg>
-        <h3>Rewrite suggestions</h3>
-        <p>Line-by-line rewrites that keep your voice while tightening impact and results.</p>
-      </div>
-      <div class="feature">
-        <svg class="feature-icon" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="15" r="5" stroke="#D99A16" stroke-width="1.4"/><path d="M9 30c0-6 4-9 10-9s10 3 10 9" stroke="#D99A16" stroke-width="1.4" stroke-linecap="round"/></svg>
-        <h3>Mock interviews</h3>
-        <p>Role-specific questions with structured feedback on clarity, evidence, and pacing.</p>
-      </div>
-      <div class="feature">
-        <svg class="feature-icon" viewBox="0 0 38 38" fill="none"><path d="M19 6l3.6 7.4 8.2 1.2-5.9 5.8 1.4 8.2L19 24.8l-7.3 3.8 1.4-8.2-5.9-5.8 8.2-1.2z" stroke="#D99A16" stroke-width="1.3" stroke-linejoin="round"/></svg>
-        <h3>Progress tracking</h3>
-        <p>Watch your readiness score climb across drafts, roles, and applications over time.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="rule"></div>
-
-  <!-- ATS DEEP DIVE -->
-  <section id="ats" class="ats-section">
-    <div class="ats-copy">
-      <h2>The score that matters before a person ever sees your resume.</h2>
-      <p>Most applications are filtered before a recruiter opens them. Laurel shows you the same breakdown the system sees — so you can fix it while it still matters.</p>
-      <div class="breakdown">
-        <div class="bd-row">
-          <div class="bd-top"><span class="name">Skills matched</span><span class="val">17 / 20</span></div>
-          <div class="bd-track"><div class="bd-fill gold" style="width:85%"></div></div>
-        </div>
-        <div class="bd-row">
-          <div class="bd-top"><span class="name">Formatting compatibility</span><span class="val">92%</span></div>
-          <div class="bd-track"><div class="bd-fill gold" style="width:92%"></div></div>
-        </div>
-        <div class="bd-row">
-          <div class="bd-top"><span class="name">Missing keywords</span><span class="val crimson">3 found</span></div>
-          <div class="bd-track"><div class="bd-fill crimson" style="width:15%"></div></div>
-        </div>
-      </div>
-    </div>
-    <div class="ats-panel">
-      <div class="ats-row">
-        <div class="kw"><span class="dot match"></span>Stakeholder management</div>
-        <div class="status">Matched</div>
-      </div>
-      <div class="ats-row">
-        <div class="kw"><span class="dot match"></span>SQL and data analysis</div>
-        <div class="status">Matched</div>
-      </div>
-      <div class="ats-row">
-        <div class="kw"><span class="dot missing"></span>Cross-functional leadership</div>
-        <div class="status missing">Missing — add an example</div>
-      </div>
-      <div class="ats-row">
-        <div class="kw"><span class="dot match"></span>Roadmap planning</div>
-        <div class="status">Matched</div>
-      </div>
-      <div class="ats-row">
-        <div class="kw"><span class="dot missing"></span>Budget ownership</div>
-        <div class="status missing">Missing — add an example</div>
-      </div>
-      <div class="ats-row">
-        <div class="kw"><span class="dot match"></span>Agile delivery</div>
-        <div class="status">Matched</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- QUOTE -->
-  <section class="quote-section" id="story">
-    <span class="quote-mark">&ldquo;</span>
-    <blockquote>I'd sent the same resume to forty roles with three callbacks. Laurel found the two lines that were quietly filtering me out. The next ten applications got five.</blockquote>
-    <div class="quote-attr">
-      <div class="line"></div>
-      <div class="who"><b>Priya Nandakumar</b> — Product Manager, hired via Laurel in six weeks</div>
-    </div>
-  </section>
-
-  <!-- CLOSING CTA -->
-  <section class="closing">
-    <div class="closing-panel">
-      <h2>Your next application deserves a second read before it's your only one.</h2>
-      <div class="closing-ctas">
-        <a href="#" class="btn btn-primary">Analyze my resume <span class="arrow">→</span></a>
-        <a href="#" class="btn btn-secondary">View sample report</a>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="foot-brand">
-    <svg viewBox="0 0 40 40" fill="none">
-      <circle cx="20" cy="20" r="18" stroke="#D99A16" stroke-width="1.2" opacity="0.5"/>
-      <path d="M20 6 A14 14 0 0 1 34 20" stroke="#D99A16" stroke-width="1.8" stroke-linecap="round"/>
-    </svg>
-    <span>Laurel</span>
-  </div>
-  <div class="foot-links">
-    <a href="#">Privacy</a>
-    <a href="#">Terms</a>
-    <a href="#">Contact</a>
-  </div>
-</footer>
-
-<script>
-  // Animate ATS score ring on scroll into view
-  const ring = document.getElementById('scoreRing');
-  const numEl = document.getElementById('scoreNum');
-  const circumference = 2 * Math.PI * 94; // ~590.6
-  const targetScore = 87;
-  let animated = false;
-
-  function animateScore(){
-    if(animated) return;
-    animated = true;
-    const offset = circumference - (targetScore/100) * circumference;
-    ring.style.strokeDashoffset = offset;
-
-    let start = null;
-    const duration = 1600;
-    function step(ts){
-      if(!start) start = ts;
-      const progress = Math.min((ts - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      numEl.textContent = Math.round(eased * targetScore);
-      if(progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) animateScore();
-    });
-  }, { threshold: 0.4 });
-
-  observer.observe(document.querySelector('.score-panel'));
-
-  // Fallback in case IntersectionObserver doesn't fire (e.g. hero already in view)
-  window.addEventListener('load', () => {
-    setTimeout(animateScore, 500);
-  });
-</script>
-
-</body>
-</html>
+      
