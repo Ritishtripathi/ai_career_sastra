@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerAI — Smart Career Profile Analysis</title>
+  <meta name="description" content="A thoughtful career workspace for resume analysis, skill discovery and interview preparation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#FFF8F0; --ink:#1E1710; --saffron:#FF5B1F; --burnt:#C13E00;
+      --amber:#F2A93B; --cream:#fffdf9; --line:#eadfd2; --muted:#766b61;
+      --shadow:0 20px 55px rgba(63,34,14,.12);
+      --radius:24px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:"DM Sans",sans-serif;color:var(--ink);background:var(--paper);line-height:1.55;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    button{font:inherit}
+    .grain{position:fixed;inset:0;pointer-events:none;opacity:.035;z-index:50;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E")}
+    .container{width:min(1160px,92%);margin:auto}
+    .nav{height:82px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:10}
+    .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.5px;font-size:20px}
+    .mark{width:38px;height:38px;border-radius:12px;background:var(--ink);display:grid;place-items:center;color:#fff;font-weight:700;position:relative;overflow:hidden}
+    .mark:after{content:"";width:15px;height:15px;border:3px solid var(--amber);border-radius:50%;position:absolute;top:8px;right:7px}
+    .links{display:flex;gap:30px;align-items:center;color:#5f554c;font-size:14px}
+    .links a:hover{color:var(--saffron)}
+    .nav-actions{display:flex;gap:12px;align-items:center}
+    .btn{border:0;border-radius:13px;padding:12px 18px;font-weight:700;cursor:pointer;transition:.25s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+    .btn-outline{background:transparent;border:1px solid var(--line);color:var(--ink)}
+    .btn-outline:hover{border-color:var(--ink);transform:translateY(-2px)}
+    .btn-primary{background:var(--ink);color:#fff}
+    .btn-primary:hover{background:var(--burnt);transform:translateY(-2px);box-shadow:0 12px 25px rgba(193,62,0,.2)}
+    .hero{min-height:650px;display:grid;grid-template-columns:1.04fr .96fr;gap:60px;align-items:center;padding:60px 0 100px;position:relative}
+    .hero:before{content:"";position:absolute;width:520px;height:520px;background:radial-gradient(circle,rgba(242,169,59,.2),transparent 65%);right:-190px;top:-30px;z-index:-1}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--burnt);font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:22px}
+    .eyebrow span{width:8px;height:8px;background:var(--saffron);border-radius:50%}
+    h1{font-family:"Playfair Display",serif;font-size:clamp(52px,6vw,82px);line-height:.98;letter-spacing:-3px;max-width:720px}
+    h1 em{font-style:normal;color:var(--saffron)}
+    .hero-copy{font-size:18px;color:var(--muted);max-width:570px;margin:25px 0 31px}
+    .hero-buttons{display:flex;gap:12px;flex-wrap:wrap}
+    .micro{display:flex;gap:18px;margin-top:27px;color:#665b51;font-size:12px}
+    .micro span{display:flex;align-items:center;gap:7px}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--amber)}
+    .dashboard{background:var(--cream);border:1px solid #eaded1;border-radius:30px;padding:19px;box-shadow:var(--shadow);transform:rotate(1.2deg);animation:float 6s ease-in-out infinite}
+    @keyframes float{50%{transform:rotate(0) translateY(-8px)}}
+    .dash-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+    .dash-title{font-weight:700}.pill{font-size:11px;padding:7px 10px;border-radius:99px;background:#fff1df;color:var(--burnt);font-weight:700}
+    .score-card{background:var(--ink);color:#fff;border-radius:22px;padding:22px;display:flex;justify-content:space-between;align-items:center}
+    .score-label{font-size:12px;color:#cfc4b9}.score{font-size:55px;font-weight:700;letter-spacing:-3px;line-height:1}.score b{color:var(--amber);font-size:20px;letter-spacing:0}
+    .ring{width:82px;height:82px;border-radius:50%;background:conic-gradient(var(--amber) 0 82%,#49382c 82%);display:grid;place-items:center;position:relative}
+    .ring:after{content:"";position:absolute;width:61px;height:61px;border-radius:50%;background:var(--ink)}
+    .ring strong{position:relative;z-index:1;font-size:13px}
+    .dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+    .mini{border:1px solid var(--line);border-radius:18px;padding:16px;background:#fff}
+    .mini h4{font-size:13px;margin-bottom:8px}.mini p{font-size:12px;color:var(--muted)}
+    .bars{display:flex;gap:5px;align-items:flex-end;height:45px;margin-top:8px}
+    .bars i{display:block;width:12px;background:var(--saffron);border-radius:5px 5px 2px 2px}.bars i:nth-child(1){height:22%}.bars i:nth-child(2){height:42%}.bars i:nth-child(3){height:34%}.bars i:nth-child(4){height:68%}.bars i:nth-child(5){height:83%}.bars i:nth-child(6){height:100%}
+    .section{padding:105px 0}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:45px}
+    .section-kicker{color:var(--burnt);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px}
+    h2{font-family:"Playfair Display",serif;font-size:48px;line-height:1.05;letter-spacing:-1.8px;margin-top:9px}
+    .section-head p{max-width:430px;color:var(--muted);font-size:15px}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .feature{background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px;min-height:245px;transition:.3s}
+    .feature:hover{transform:translateY(-7px);box-shadow:var(--shadow);border-color:#decbbb}
+    .icon{width:45px;height:45px;border-radius:14px;background:#fff0e5;display:grid;place-items:center;color:var(--burnt);font-size:20px;margin-bottom:35px}
+    .feature h3{font-size:18px;margin-bottom:9px}.feature p{font-size:13px;color:var(--muted)}
+    .workflow{background:var(--ink);color:#fff;border-radius:35px;padding:55px}
+    .workflow .section-kicker{color:var(--amber)}
+    .workflow h2{color:#fff;max-width:600px}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:55px}
+    .step{padding:0 24px 0 0;border-right:1px solid #4b4037;margin-right:24px}.step:last-child{border:0;margin:0}
+    .num{color:var(--amber);font-size:13px;font-weight:800}.step h3{font-size:17px;margin:12px 0 7px}.step p{font-size:12px;color:#bdb3aa}
+    .quote{padding:100px 0;text-align:center}.quote blockquote{font-family:"Playfair Display",serif;font-size:42px;line-height:1.16;max-width:800px;margin:auto}.quote cite{display:block;color:var(--muted);font:500 12px "DM Sans";margin-top:20px}
+    .cta{background:linear-gradient(120deg,#ff6a2d,#c13e00);border-radius:32px;padding:55px;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:30px;overflow:hidden;position:relative}
+    .cta:after{content:"";position:absolute;width:260px;height:260px;border:1px solid rgba(255,255,255,.25);border-radius:50%;right:70px;top:-100px}
+    .cta h2{max-width:600px}.cta p{color:#ffe1cf;margin-top:12px;max-width:550px;font-size:14px}.cta .btn{background:#fff;color:var(--ink);position:relative;z-index:1}
+    footer{padding:55px 0 35px;display:flex;justify-content:space-between;color:#756a60;font-size:12px}.footer-brand{font-weight:700;color:var(--ink);font-size:15px}
+    .reveal{opacity:0;transform:translateY(24px);transition:.7s ease}.reveal.show{opacity:1;transform:none}
+    @media(max-width:850px){
+      .links{display:none}.hero{grid-template-columns:1fr;padding-top:40px}.dashboard{max-width:650px;width:100%;margin:auto}
+      .features{grid-template-columns:1fr 1fr}.steps{grid-template-columns:1fr 1fr;gap:30px}.step{border:0;margin:0}.section-head{display:block}.section-head p{margin-top:18px}.cta{display:block}.cta .btn{margin-top:25px}
+    }
+    @media(max-width:560px){
+      .nav-actions .btn-outline{display:none}.hero{padding-bottom:70px}h1{font-size:51px;letter-spacing:-2px}.hero-copy{font-size:16px}.features,.dash-grid{grid-template-columns:1fr}.workflow{padding:32px 24px}.steps{grid-template-columns:1fr}.quote blockquote{font-size:31px}.cta{padding:35px 25px}footer{display:block}.footer-brand{margin-bottom:10px}
+    }
+  </style>
+</head>
+<body>
+<div class="grain"></div>
+<header class="container nav">
+  <a class="brand" href="#"><span class="mark">C</span> CareerAI</a>
+  <nav class="links">
+    <a href="#how">How it works</a><a href="#features">Features</a><a href="#journey">Your journey</a>
+  </nav>
+  <div class="nav-actions"><button class="btn btn-outline" onclick="showToast('Demo login selected')">Sign in</button><a class="btn btn-primary" href="#start">Get started</a></div>
+</header>
+
+<main>
+<section class="container hero">
+  <div class="reveal">
+    <div class="eyebrow"><span></span> A clearer path to your next opportunity</div>
+    <h1>Your career deserves more than a <em>score.</em></h1>
+    <p class="hero-copy">Understand what your resume says about you, discover what is missing, and turn uncertainty into a focused interview plan.</p>
+    <div class="hero-buttons"><a class="btn btn-primary" href="#start">Analyze my resume →</a><a class="btn btn-outline" href="#how">See how it works</a></div>
+    <div class="micro"><span><i class="dot"></i> Resume insights</span><span><i class="dot"></i> Skill clarity</span><span><i class="dot"></i> Interview practice</span></div>
+  </div>
+  <div class="dashboard reveal" aria-label="Product dashboard preview">
+    <div class="dash-top"><div class="dash-title">Your career snapshot</div><div class="pill">Updated today</div></div>
+    <div class="score-card"><div><div class="score-label">Resume readiness</div><div class="score">82 <b>/100</b></div></div><div class="ring"><strong>Strong</strong></div></div>
+    <div class="dash-grid">
+      <div class="mini"><h4>Skill alignment</h4><p>8 strong · 3 to develop</p><div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="mini"><h4>Interview readiness</h4><p>Next: Product thinking</p><div style="margin-top:20px;font-weight:700;color:var(--burnt)">72% prepared</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section container reveal" id="features">
+  <div class="section-head"><div><div class="section-kicker">One place. Less guesswork.</div><h2>Know where you stand.<br>Know what to do next.</h2></div><p>CareerAI turns a static resume into a practical career workspace — with useful feedback you can act on, not generic advice.</p></div>
+  <div class="features">
+    <article class="feature"><div class="icon">◎</div><h3>Resume intelligence</h3><p>Get an ATS-style score, section-level observations and clear suggestions for stronger content and structure.</p></article>
+    <article class="feature"><div class="icon">⌁</div><h3>Skill gap map</h3><p>Compare your profile with a target role and see which skills already stand out — and which deserve attention.</p></article>
+    <article class="feature"><div class="icon">?</div><h3>Interview studio</h3><p>Practice role-specific questions with an AI mock interview and review your performance afterwards.</p></article>
+    <article class="feature"><div class="icon">↗</div><h3>Job-specific preparation</h3><p>Shift preparation from broad studying to questions, topics and skills connected to the opportunity you want.</p></article>
+    <article class="feature"><div class="icon">◷</div><h3>Progress that stays visible</h3><p>Track preparation over time so improvement becomes measurable rather than something you simply feel.</p></article>
+    <article class="feature"><div class="icon">✦</div><h3>Personal career profile</h3><p>Build a living picture of your strengths, experience, goals and preparation journey in one place.</p></article>
+  </div>
+</section>
+
+<section class="container section reveal" id="how">
+  <div class="workflow">
+    <div class="section-kicker">A simple process</div>
+    <h2>From “Am I ready?” to<br>“I know what to work on.”</h2>
+    <div class="steps">
+      <div class="step"><div class="num">01</div><h3>Upload</h3><p>Bring your current resume into your private career workspace.</p></div>
+      <div class="step"><div class="num">02</div><h3>Understand</h3><p>See your score, strengths, gaps and practical improvement areas.</p></div>
+      <div class="step"><div class="num">03</div><h3>Prepare</h3><p>Choose a target role and practice relevant interview questions.</p></div>
+      <div class="step"><div class="num">04</div><h3>Improve</h3><p>Review your progress and return with a sharper profile.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="quote container reveal" id="journey">
+  <blockquote>“The goal isn't to make your resume look better. It's to make your career story clearer.”</blockquote>
+  <cite>— CareerAI principle</cite>
+</section>
+
+<section class="container reveal" id="start">
+  <div class="cta">
+    <div><div class="section-kicker" style="color:#ffe0c8">Your next step</div><h2>Start with the resume you have today.</h2><p>Upload it, understand it, and build a preparation plan around the role you actually want.</p></div>
+    <button class="btn" onclick="showToast('Resume upload will connect to the backend here.')">Upload resume →</button>
+  </div>
+</section>
+</main>
+
+<footer class="container"><div><div class="footer-brand">CareerAI</div><div>Smart Career Profile Analysis & Interview Preparation</div></div><div>© 2026 · College Project</div></footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show') }), {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  function showToast(msg){
+    let t=document.querySelector('.toast');
+    if(!t){t=document.createElement('div');t.className='toast';document.body.appendChild(t)}
+    t.textContent=msg;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2500);
+  }
+</script>
+<style>
+.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:13px 18px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:.3s;z-index:100}.toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</body>
+</html>
