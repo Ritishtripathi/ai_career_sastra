@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CareerAI — AI-powered resume analysis, skill-gap discovery and interview preparation platform.">
+  <title>CareerAI — Build a Career That Gets Noticed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient background -->
+  <div class="noise"></div>
+  <div class="orb orb-one"></div>
+  <div class="orb orb-two"></div>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a href="#" class="brand" aria-label="CareerAI home">
+      <span class="brand-mark">
+        <span class="brand-dot"></span>
+        <span class="brand-ring"></span>
+      </span>
+      <span>Career<span>AI</span></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#how-it-works">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#why-us">Why CareerAI</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="login.html" class="login-link">Log in</a>
+      <a href="register.html" class="btn btn-nav">Get started <span>↗</span></a>
+    </div>
+
+    <button class="menu-toggle" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">
+          <span class="pulse"></span>
+          AI-powered career intelligence
+        </div>
+
+        <h1>Don’t just apply.<br><em>Get noticed.</em></h1>
+
+        <p class="hero-text">
+          Turn your resume into a career strategy. Discover what’s missing,
+          sharpen your profile, and practice for the interview before the
+          interviewer ever meets you.
+        </p>
+
+        <div class="hero-actions">
+          <a href="register.html" class="btn btn-primary">
+            Analyze my resume <span>→</span>
+          </a>
+          <a href="#how-it-works" class="watch-link">
+            <span class="play">▶</span>
+            See how it works
+          </a>
+        </div>
+
+        <div class="trust-row">
+          <div class="avatar-stack">
+            <span>R</span><span>M</span><span>A</span><span>+</span>
+          </div>
+          <div>
+            <strong>Built for ambitious students</strong>
+            <small>Resume → Skills → Interview → Confidence</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO PRODUCT MOCKUP -->
+      <div class="hero-visual">
+        <div class="visual-glow"></div>
+
+        <div class="dashboard-window">
+          <div class="window-top">
+            <div class="window-brand">
+              <span class="mini-logo">✦</span>
+              CareerAI
+            </div>
+            <div class="window-profile">
+              <span class="notification">2</span>
+              <span class="profile-avatar">RT</span>
+            </div>
+          </div>
+
+          <div class="dashboard-body">
+            <div class="dash-greeting">
+              <div>
+                <small>MONDAY, 14 SEPTEMBER</small>
+                <h3>Good morning, Ritish <span>👋</span></h3>
+              </div>
+              <div class="mini-status"><span></span> Profile active</div>
+            </div>
+
+            <div class="score-card">
+              <div class="score-info">
+                <span class="card-label">RESUME HEALTH</span>
+                <div class="score-line">
+                  <strong>82</strong><span>/100</span>
+                </div>
+                <p>You're ahead of <b>68%</b> of profiles analyzed.</p>
+                <a href="#">View full analysis →</a>
+              </div>
+              <div class="score-chart">
+                <svg viewBox="0 0 130 130">
+                  <circle class="chart-track" cx="65" cy="65" r="52"></circle>
+                  <circle class="chart-progress" cx="65" cy="65" r="52"></circle>
+                </svg>
+                <div class="chart-center"><b>82%</b><span>ATS</span></div>
+              </div>
+            </div>
+
+            <div class="dash-grid">
+              <div class="dash-card skill-card">
+                <div class="card-heading"><span>Skill match</span><b>74%</b></div>
+                <div class="skill-bar"><i style="width:74%"></i></div>
+                <div class="skill-list">
+                  <span>Laravel</span><span>React</span><span>REST APIs</span><span class="missing">+3 missing</span>
+                </div>
+              </div>
+
+              <div class="dash-card interview-card">
+                <div class="card-heading"><span>Interview readiness</span><b>68%</b></div>
+                <div class="mini-bars">
+                  <i style="height:45%"></i><i style="height:62%"></i><i style="height:51%"></i>
+                  <i style="height:78%"></i><i style="height:66%"></i><i style="height:88%"></i>
+                  <i style="height:74%"></i>
+                </div>
+                <small>+12% this week</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating insight -->
+        <div class="floating-card insight-card">
+          <div class="float-icon">✦</div>
+          <div>
+            <small>AI INSIGHT</small>
+            <strong>Your profile is getting stronger.</strong>
+            <span>2 high-impact skills found</span>
+          </div>
+        </div>
+
+        <!-- Floating score -->
+        <div class="floating-card score-float">
+          <span class="tiny-check">✓</span>
+          <div><small>ATS SCORE</small><strong>+18</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGO / SOCIAL PROOF STRIP -->
+    <section class="proof-strip">
+      <p>One workspace for your entire career preparation</p>
+      <div class="proof-items">
+        <span><b>01</b> Resume Intelligence</span>
+        <span><b>02</b> Skill Discovery</span>
+        <span><b>03</b> Interview Practice</span>
+        <span><b>04</b> Progress Tracking</span>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="problem section">
+      <div class="section-tag">THE REAL PROBLEM</div>
+      <div class="problem-grid">
+        <div>
+          <h2>Sending more resumes<br>isn't the <em>answer.</em></h2>
+        </div>
+        <div class="problem-copy">
+          <p>
+            Most students don't know why their resume gets ignored. Maybe the
+            keywords are wrong. Maybe the role needs skills they haven't
+            noticed. Or maybe they simply haven't practiced the questions that
+            matter.
+          </p>
+          <p class="strong-copy">CareerAI connects all three gaps in one journey.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="journey section" id="how-it-works">
+      <div class="section-heading centered">
+        <div class="section-tag">YOUR CAREER JOURNEY</div>
+        <h2>From <em>“Am I ready?”</em><br>to <em>“I'm ready.”</em></h2>
+        <p>A simple flow. A deeper analysis. A measurable outcome.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <div class="step-icon">↥</div>
+          <h3>Upload</h3>
+          <p>Drop your existing resume. We turn your document into structured career data.</p>
+          <span class="step-link">Resume Analyzer →</span>
+        </div>
+
+        <div class="step-connector"></div>
+
+        <div class="step-card featured">
+          <div class="step-number">02</div>
+          <div class="step-icon">◎</div>
+          <h3>Understand</h3>
+          <p>Get your ATS score, strengths, missing skills and practical improvement suggestions.</p>
+          <span class="step-link">Skill Gap Analysis →</span>
+        </div>
+
+        <div class="step-connector"></div>
+
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <div class="step-icon">◌</div>
+          <h3>Practice</h3>
+          <p>Choose a job or company and practice realistic questions in an AI mock interview.</p>
+          <span class="step-link">Mock Interview →</span>
+        </div>
+
+        <div class="step-connector"></div>
+
+        <div class="step-card">
+          <div class="step-number">04</div>
+          <div class="step-icon">↗</div>
+          <h3>Improve</h3>
+          <p>Track your performance and build confidence through measurable progress.</p>
+          <span class="step-link">Progress Dashboard →</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features section" id="features">
+      <div class="section-heading">
+        <div class="section-tag">INSIDE CAREERAI</div>
+        <h2>Everything you need.<br><em>Nothing scattered.</em></h2>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card feature-large">
+          <div class="feature-copy">
+            <span class="feature-number">01</span>
+            <h3>Know your resume<br>before recruiters do.</h3>
+            <p>Get more than a score. Understand what is helping your profile and exactly what is holding it back.</p>
+            <a href="#">Explore resume analysis <span>↗</span></a>
+          </div>
+          <div class="resume-preview">
+            <div class="resume-top"></div>
+            <div class="resume-title"></div>
+            <div class="resume-line long"></div>
+            <div class="resume-line medium"></div>
+            <div class="resume-score"><strong>82</strong><small>ATS SCORE</small></div>
+            <div class="resume-tags"><i></i><i></i><i></i></div>
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-number">02</span>
+          <div class="feature-icon">◇</div>
+          <h3>Find the skills<br>between you and the role.</h3>
+          <p>Compare your profile against your target career and uncover meaningful skill gaps.</p>
+          <div class="gap-demo">
+            <span>YOUR PROFILE</span><i></i><b>ROLE</b>
+          </div>
+        </article>
+
+        <article class="feature-card dark-card">
+          <span class="feature-number">03</span>
+          <div class="feature-icon">◉</div>
+          <h3>Practice the<br>conversation.</h3>
+          <p>Move beyond static question lists. Simulate an interview and learn from your performance.</p>
+          <div class="wave">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+        </article>
+
+        <article class="feature-card feature-wide">
+          <div>
+            <span class="feature-number">04</span>
+            <h3>See your progress,<br>not just your mistakes.</h3>
+            <p>Your preparation becomes visible through scores, attempts and improvement trends.</p>
+          </div>
+          <div class="progress-demo">
+            <div><small>RESUME</small><b>82%</b><span style="width:82%"></span></div>
+            <div><small>SKILLS</small><b>74%</b><span style="width:74%"></span></div>
+            <div><small>INTERVIEW</small><b>68%</b><span style="width:68%"></span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="why section" id="why-us">
+      <div class="why-inner">
+        <div class="why-copy">
+          <div class="section-tag">BUILT DIFFERENTLY</div>
+          <h2>A resume score is useful.<br><em>A career signal is better.</em></h2>
+          <p>
+            CareerAI is designed as a connected preparation system. Your resume
+            analysis informs your skill-gap view. Your target role informs your
+            questions. Your interview performance feeds your progress.
+          </p>
+          <a href="register.html" class="btn btn-primary">Build my profile <span>→</span></a>
+        </div>
+
+        <div class="signal-visual">
+          <div class="signal-center">
+            <span>✦</span>
+            <strong>CAREER<br>SIGNAL</strong>
+          </div>
+          <div class="signal-node node-1"><b>Resume</b><small>82</small></div>
+          <div class="signal-node node-2"><b>Skills</b><small>74%</small></div>
+          <div class="signal-node node-3"><b>Interview</b><small>68%</small></div>
+          <div class="signal-node node-4"><b>Progress</b><small>+12%</small></div>
+          <div class="signal-line line-1"></div>
+          <div class="signal-line line-2"></div>
+          <div class="signal-line line-3"></div>
+          <div class="signal-line line-4"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta section">
+      <div class="cta-shape shape-one"></div>
+      <div class="cta-shape shape-two"></div>
+      <div class="cta-content">
+        <div class="section-tag">YOUR NEXT MOVE</div>
+        <h2>Stop guessing.<br><em>Start preparing.</em></h2>
+        <p>Upload your resume and discover where you stand in under a few minutes.</p>
+        <a href="register.html" class="btn btn-light">Start your career analysis <span>↗</span></a>
+        <small>No complicated setup. Just your resume and your ambition.</small>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <a href="#" class="brand footer-brand">
+        <span class="brand-mark"><span class="brand-dot"></span><span class="brand-ring"></span></span>
+        <span>Career<span>AI</span></span>
+      </a>
+      <p>Smarter preparation for the career you want.</p>
+      <div class="footer-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#">Privacy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 CareerAI. Academic project.</span>
+      <span>Designed for students & job seekers.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Small mobile navigation interaction
+    const menu = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.nav-links');
+    menu?.addEventListener('click', () => {
+      nav.classList.toggle('open');
+      menu.classList.toggle('active');
+    });
+
+    // Subtle reveal animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.section, .feature-card, .step-card').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
